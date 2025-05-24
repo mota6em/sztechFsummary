@@ -1,296 +1,284 @@
-📘 Telekommunikációs Hálózatok – Lecture 1 Summary (For Exam)
-🌐 1. What is the Internet?
-Network of networks (globally connected, no central control)
+📚 Telekommunikációs Hálózatok – Előadás 1 Összefoglaló
+🌐 Az Internet mérete és szerepe
+2023-ra ~30 milliárd eszköz kapcsolódott az internetre.
 
-Components:
+Napi internetes adatforgalom ~13 exabájt.
 
-End devices (hosts)
+A teljes IP forgalom 82%-a videó.
 
-Switches & routers
+🛑 Internet veszélyei
+Politikai lekapcsolások, PRISM program (megfigyelés).
 
-Transmission media (cables, wireless, optical fiber)
+Netsemlegesség kérdése: ISP lassíthat-e bizonyos forgalmat?
 
-📦 2. Packet-Switched vs Circuit-Switched
-Feature Packet-Switched (Internet) Circuit-Switched (Phone)
-Resource use On demand Reserved in advance
-Efficiency High for bursty traffic Low for bursty traffic
-Setup time No setup Needs connection setup
-Example Data transfer Voice call
+Netflix vs. ISP: ki fizet az adatforgalomért?
 
-Protocol for circuit-switching: RSVP (Resource Reservation Protocol)
+💥 Sérülékenység példák
+BGP szivárgás → forgalom rossz helyre megy.
 
-📶 3. Network Access Technologies
-DSL (phone line): asymmetric bandwidth (higher download)
+Emberi hibák → a kiesések 50–80%-át okozzák.
 
-CATV (cable TV): shared medium, also asymmetric
+🧠 A tárgy fő kérdései
+Címzés – hogyan címezhetők eszközök?
 
-Ethernet: LAN technology (1, 10, 100 Gbps, symmetric)
+Rétegek – hogyan kezeljük a komplexitást?
 
-Other types: FTTH, Mobile, Satellite, Infiniband
+Forgalomirányítás – hogyan jutunk el A-ból B-be?
 
-📊 4. Resource Sharing Methods
-Two main models:
-Előre foglalás (Reservation) → fixed resources, wasteful if not used
+Megbízhatóság – hogyan biztosítsunk megbízható átvitelt?
 
-Igény szerinti (On-demand) → dynamic, better utilization
+Erőforrás megosztás – hogyan osszuk el a sávszélességet?
 
-Key ratios:
-P/A (Peak/Average rate):
+🧱 Hálózati építőelemek
+Végpontok: mobil, PC, szerver, okoseszközök.
 
-Low → reservation is OK (e.g., voice)
+Switchek és routerek: adatirányítás.
 
-High → reservation is wasteful (e.g., data, bursty)
+Linkek: réz, optikai, vezeték nélküli.
 
-🧠 5. Important Concepts
-Hoszt: network-connected device
+🧮 Hálózati sávszélesség
+Mértékegység: bps (bit per second), pl. Mbps, Gbps, Tbps.
 
-Flow: logically grouped communication (e.g., TCP stream)
+📡 Hozzáférési technológiák
+DSL (ADSL) – telefonvonal, aszimmetrikus.
 
-Multiplexálás:
+KábelTV (CATV) – közös közeg, aszimmetrikus.
 
-Flow-level (reservation)
+Ethernet (LAN) – leggyakoribb helyi hálózat.
 
-Packet-level (on demand)
+🕸 Topológia és erőforrásmegosztás
+Hibatolerancia = több útvonal
 
-Topologies: mesh, ring, star → Internet uses a hybrid with switch-based networks
+Teljes összeköttetés nem praktikus → switchelt hálózatok
 
-🕸 6. Internet Structure
-ISP hierarchy:
+🔄 Multiplexálás típusai
+Előre foglalás: garantált erőforrás, de pazarló.
 
-Tier 1: no upstream provider
+Igény szerinti: hatékonyabb, de változó teljesítmény.
 
-Tier 2: connects T1s and T3s
+🔁 Kapcsolás típusok
+Típus Példa Jellemzők
+Áramkörkapcsolt Telefon Előre foglalás, kiszámítható, de nem hatékony
+Csomagkapcsolt Internet Igény szerinti, hatékony, de nem kiszámítható
 
-Tier 3: local access (home/uni/company)
+🏛 Internet felépítése
+ISP (Access, Tier-3, Tier-2, Tier-1) – hierarchikus.
 
-Peering: direct inter-ISP connection
+Peering – közvetlen kapcsolatok a költségcsökkentésért.
 
-IXP: internet exchange point to reduce costs
+IXP (Internet Exchange Point) – hálózatok csatlakozása.
 
-🛑 7. Risks and Outages
-BGP misconfiguration → massive traffic rerouting (e.g., 2017 incidents)
+📜 Történelem röviden
+1969: ARPANET elindul – az első üzenet „LO”
 
-Internet shutdowns → political reasons in some countries
+1974: TCP/IP alapjai lefektetve (Cerf & Kahn)
 
-Human errors → 50–80% of network outages
+1983: DNS bevezetése
 
-🧾 8. Exam Format
-Must pass practice part to take the exam
+1989: Web születése (Tim Berners-Lee)
 
-📘 3 parts:
-
-English terms test (20 Q, pass = 50%, no points)
-
-MCQ Test (60 Q, 60 mins, min 30 pts)
-
-30–44 pts = 2
-
-45–59 pts = 3
-
-Oral exam required for 4–5
+1990-es évek: Google, keresők, modern internet
 
 <!-- 2 -->
 
-📘 Előadás 2 – Kommunikáció, Protokollrétegek, Teljesítmény (Vizsgára)
-🔄 1. Kommunikáció az Interneten
-Cél: Távoli folyamatok (pl. Alice & Bob) adatot tudjanak cserélni
+📚 Telekommunikációs Hálózatok – Előadás 2 Összefoglaló
+📡 Kommunikáció lényege
+Az Internet célja: különböző gépeken futó folyamatok adatot cserélhessenek.
 
-Protokoll: szabályrendszer (ki beszél, mikor, hogyan válaszol)
+Ez protokollok segítségével történik.
 
-Példa: WoW kliens–szerver → API-kon keresztül történik
+A protokoll: szabályrendszer, ami meghatározza a kommunikáció menetét.
 
-🧱 2. Modularitás & Rétegzés
-Modularitás segíti:
+🔁 Modularitás
+Nagy rendszerek nem működhetnek „spagetti kód” alapján.
 
-hibaelhárítást
+Megoldás: Rétegek bevezetése – modularitás + absztrakció
 
-frissítést
+Minden réteg szolgáltatást nyújt a fölötte lévőnek, az alatta lévő használatával.
 
-skálázhatóságot
+📦 Rétegmodellek
+🌍 TCP/IP modell (RFC 1122) – 4 réteg
+Alkalmazási réteg – HTTP, FTP, DNS stb.
 
-Protokollok rétegekre bontva, minden réteg egy másikat használ, és egy másiknak szolgáltat
+Szállítási réteg – TCP (megbízható), UDP (nem megbízható)
 
-🧩 3. Modell típusok
-🔹 TCP/IP modell (4 réteg)
-Link, Internet, Szállítási, Alkalmazási
+Hálózati réteg – IP, útvonalválasztás
 
-🔹 Hibrid modell (5 réteg)
-Fizikai, Adatkapcsolati, Hálózati, Szállítási, Alkalmazási
+Kapcsolati réteg – Ethernet, WiFi, fizikai kapcsolat
 
-🔹 OSI modell (7 réteg)
-Fizikai → Adatkapcsolati → Hálózati → Szállítási → Ülés → Megjelenítési → Alkalmazási
+🌐 OSI modell – 7 réteg
+Fizikai réteg – bit átvitel (kábel, rádió, stb.)
 
-📦 4. Rétegek funkciói
-Réteg Szolgáltatás Példák
-Alkalmazási Felhasználói alkalmazások HTTP, FTP, DNS
-Megjelenítési Adatformátum-átalakítás ASCII↔Unicode
-Ülés Kapcsolat menedzsment (ritka, nincs konkrét protokoll)
-Szállítási Megbízható továbbítás, multiplexálás TCP, UDP
-Hálózati Útvonalválasztás, IP címzés IPv4, IPv6
-Adatkapcsolati Keretezés, MAC, megbízhatóság Ethernet, WiFi
-Fizikai Bitek átvitele Optikai kábel, koax, réz
+Adatkapcsolati réteg – keretezés, MAC, hibakezelés
 
-📌 PDU-k:
+Hálózati réteg – IP, routing
 
-Alkalmazás: üzenet
+Szállítási réteg – TCP/UDP, portok
 
-Szállítás: szegmens
+Ülés réteg – kapcsolat kezelése, szinkronizálás (ritkán van külön implementálva)
 
-Hálózati: csomag
+Megjelenítési réteg – adatformátum konverzió (ASCII, Unicode, stb.)
 
-Adatkapcsolat: keret
+Alkalmazási réteg – konkrét hálózati alkalmazások
 
-Fizikai: bitek
+📌 Fontos: A TCP/IP és OSI rétegmodell összevonható: gyakorlatban a 7 rétegből inkább 5 működik.
 
-📦 5. Beágyazás (Encapsulation)
-Minden réteg hozzáad egy fejlécet az előzőhöz
+🧱 Protokoll adategységek (PDU-k)
+Alkalmazás → üzenet
 
-Példa: HTTP → TCP → IP → Ethernet → Fizikai átviteli egység
+Szállítási → szegmens
 
-💻 6. Hol vannak a rétegek?
-Hosztok (PC, szerver): minden réteg
+Hálózati → csomag (packet)
 
-Router: L3 + L2 (IP + Ethernet)
+Kapcsolati → keret (frame)
 
-Switch: csak L2 (Ethernet)
+Fizikai → bitek
 
-⏱ 7. Hálózati jellemzők
-Teljes késleltetés:
-Másolás
-Szerkesztés
-= átviteli + terjedési + feldolgozási + várakozási késleltetés
-Átviteli késleltetés:
-Másolás
-Szerkesztés
-= csomag mérete / sávszélesség
-Terjedési késleltetés:
-Másolás
-Szerkesztés
-= távolság / jelterjedési sebesség
-Várakozási késleltetés (queueing):
-függ a forgalomtól
+🌐 Hálózati eszközök réteg szerint
+Hoszt: minden réteget implementál (L1–L5)
 
-intenzitás = (La / R) (La: érkezési sebesség, R: sávszélesség)
+Router: L3-ig működik (hálózati rétegig)
 
-Feldolgozási késleltetés:
-fejléc elemzése → általában kicsi
+Switch: csak L2 (adatkapcsolati réteg)
 
-❌ 8. Csomagvesztés & Átviteli sebesség (Throughput)
-Veszteség: ha a buffer megtelik
+⏱ Hálózati teljesítmény jellemzői
 
-Átviteli sebesség:
+1. Késleltetés (delay) =
+   Átviteli késleltetés
 
-bash
-Másolás
-Szerkesztés
-= adat mennyisége / idő
-A bottleneck link határozza meg a maximumot
+Terjedési késleltetés
 
-⚠️ Aranyszabály
-Tervezd úgy a várakozási rendszert, hogy az intenzitás << 1 legyen
-(különben végtelen sor → nagy késés, elvesztés)
+Feldolgozási idő
 
-🤔 Tipikus vizsgakérdések
-Sorold fel a TCP/IP vagy OSI rétegeket
+Sorban állási idő
 
-Magyarázd el az encapsulation-t
+🧠 Képletek:
 
-Milyen késleltetési típusok vannak?
+Átviteli késleltetés = méret [bit] / sávszélesség [bps]
 
-Melyik réteg mit csinál?
+Terjedési késleltetés = távolság / terjedési sebesség (pl. fénysebesség rostban)
+
+2. Sorban állási késleltetés
+   Függ: beérkezési ráta, link sávszélessége, forgalom löketszerűsége
+
+Traffic intensity = La / R
+
+Ha >1 → sor végtelen nő
+
+Ha <=1 → késleltetés változó
+
+3. Veszteség (loss)
+   Sorok nem végtelenek → túlterhelésnél csomageldobás
+
+4. Áteresztőképesség (throughput)
+   Átlagos = adat méret / átvitel ideje
+
+Bottleneck link határozza meg
+
+✅ Extra tipp:
+Encapsulation (beágyazás) – minden réteg hozzáadja a saját fejlécét az adatcsomaghoz.
+Pl.: HTTP → TCP → IP → Ethernet (header-ek egymásba ágyazva)
 
 <!-- 3 -->
+📚 Telekommunikációs Hálózatok – Előadás 3 Összefoglaló
+⚡ Fizikai réteg szerepe
+Szolgáltatás: bitek átvitele két eszköz között.
 
-Előadás 3 – Fizikai réteg (Vizsgára)
-🧠 1. Fogalma és szerepe
-Szolgáltatás: bit szintű adatátvitel fizikailag összekötött eszközök között
+Protokoll: jelátvitel módja (pl. feszültségszintek, időzítés).
 
-Interfész: egyes bitek átvitele
+Példák: koaxiális kábel, optikai kábel, rádiófrekvencia.
 
-Protokoll: kódolási séma, feszültségszintek, időzítés
+🎯 Alapfogalmak
+Digitális gépek 0 és 1 jelekkel dolgoznak.
 
-Példák: koaxiális kábel, optikai kábel, rádióadó
+Analóg világ amplitúdóval, frekvenciával.
 
-⚙️ 2. Alapfogalmak
-Digitális világ (0,1) ≠ analóg világ (folytonos jelek)
+ASCII karakter (pl. „b”) több bitből áll → feszültséggel átvitel.
 
-Bit: alacsony/magas feszültség
+🎶 Jelátvitel és torzulás
+Fourier-sor segítségével digitális jel leírható.
 
-ASCII kódolás: pl. ‘b’ → 01100010
+Valós közegekben:
 
-Adatátvitel során zaj, elnyelődés, torzítás léphet fel
+frekvenciafüggő elnyelődés
 
-🔢 3. Szimbólumok és Adatráta
-Több bitet 1 szimbólummal lehet ábrázolni (pl. 4 szimbólum → 2 bit/szimbólum)
+fáziseltolódás
 
-BAUD: szimbólumok száma / másodperc
+zaj (pl. hő, más rendszerek zavarása)
 
-Adatráta = BAUD × log₂(n szimbólum)
+🧠 Szimbólum és bit különbsége
+Egy szimbólum több bitet jelenthet.
 
-📡 4. Átviteli közegek
-➤ Vezetékes:
-Sodort érpár: UTP/STP (telefonhálózat)
+Baud = szimbólum/sec, bps = bit/sec
 
-Koax kábel: jobb sávszél, analóg/digitális
+Pl. 16 szimbólum = 4 bit → 600 Baud = 2400 bps
 
-Optikai kábel: fényimpulzusok, magas sebesség
+🔌 Vezetékes közegek
+Sodort érpár: UTP/STP, telefonrendszerekben
 
-➤ Vezeték nélküli:
-Rádiófrekvencia: olcsó, nagy hatótáv
+Koax kábel: gyorsabb, távolabbra
 
-Mikrohullám: egyenes vonalon, olcsó
+Fényvezető szál: impulzus = 1, nincs = 0; nagy távolság, magas sávszélesség
 
-Infravörös/lézer: rövidtáv, időjárásfüggő
+📡 Vezeték nélküli közeg
+Rádiófrekvenciás: nagy távolság, egyszerű
 
-🛰 5. Műholdas kommunikáció
-Geoszinkron: 35,800 km, ~270 ms késés
+Mikrohullám: egyenes vonalban, olcsó
 
-Közepes pálya: ~10 műhold, 35–85 ms
+Infravörös/Látható fény: kistávolság, akadály érzékeny
 
-Alacsony pálya: ~50 műhold, 1–7 ms késés
+Elektromágneses spektrum:
 
-🔁 6. Kódolási technikák
-Kódolás Jellemző
-NRZ 1 → magas, 0 → alacsony, de szinkron probléma lehet
-Manchester Minden bithez átmenet (megoldja szinkront)
-NRZI 1 → váltás, 0 → nem vált, de 0-kal gond lehet
-4b/5b 4 bit → 5 bitre kódolás, NRZI előtt, hatékonyabb
+VLF → SHF, pl. TV, mobil, műhold
 
-🧰 7. Jelátvitel típusai
-Alapsáv (baseband): nyers digitális jel
+🛰 Műholdas kommunikáció
+Geoszinkron (35 800 km): 270 ms késés, 3 műhold
 
-Szélessáv (broadband): modulált jel (AM/FM/PM)
+Közepes pályás: 35–85 ms, 10 műhold
 
-🧪 8. Moduláció típusok
-Moduláció Jellemző
-AM Amplitúdó változik
-FM Frekvencia változik
-PM Fázis változik
+Alacsony pályás: 1–7 ms, 50 műhold
 
-🧮 9. Multiplexálási módszerek
-Módszer Rövidítés Jellemző
-Térbeli SDM külön vezeték/antenna
-Frekvencia FDM eltérő frekvenciák
-Időbeli TDM időszeletek, szinkron szükséges
-Hullámhossz WDM optikai (pl. színes lézerek)
-Kód CDMA egyedi kód sorozat minden állomásnak
+🔁 Digitális jel kódolások
+NRZ: 1 = magas, 0 = alacsony
 
-💡 10. CDMA – Kódosztásos Többszörös Hozzáférés
-Minden állomás saját chip-kóddal sugároz
+Probléma: sok egymás utáni 0/1 szinkronhibát okoz
 
-Üzenet = chip-sorozat × bit
+Manchester: mindig vált, 1 = magas→alacsony, 0 = alacsony→magas
 
-Vevő dekódolja ismert chip alapján
+Szinkron megoldás, de fele sávszélességet használ
 
-Ortogonális chipekkel működik → IS-95 mobil hálózat alapja
+NRZI: 1 = váltás, 0 = nem vált
 
-🤔 Tipikus vizsgakérdések:
-Mi a fizikai réteg szerepe?
+📌 Ethernet példák:
 
-Milyen kódolási technikák vannak?
+10BASE-TX: Manchester
 
-Melyek a fő átviteli közegek?
+100BASE-TX: 4B/5B + NRZI
 
-Hasonlítsd össze NRZ, Manchester és NRZI kódokat!
+Gigabit Ethernet: 8B/10B kódolás
 
-Magyarázd el CDMA működését egy példán!
+📶 Átviteli technikák
+🎚 Baseband vs Broadband
+Baseband: közvetlen feszültségátvitel
+
+Broadband: modulációval több jel → több frekvencia
+
+📊 Multiplexálási módszerek
+TDM – időbeli
+
+FDM – frekvencia
+
+WDM – hullámhossz (optika)
+
+SDM – térbeli
+
+CDM – kód alapú (mobilhálózat, IS-95)
+
+🔢 CDMA működés alapjai
+Töredékkód (chip sequence) alapján minden állomás saját kódot használ
+
+A vevő az ismert chip kóddal tudja visszafejteni a jelet
+
+Több állomás egyszerre küldhet a teljes spektrumon
+
+✅ Tipp: Kódolások + multiplexálási technikák → gyakran jönnek MC kérdésben!
