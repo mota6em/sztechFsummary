@@ -436,3 +436,302 @@ Implementációs ajánlások
 Függelék
 
 Tárgymutató
+
+<!-- 4 -->
+
+📕 ea04 – Objektumorientált tervezési szempontok és minták
+
+1. SOLID alapelvek
+   SRP (Single Responsibility Principle): Egy osztály csak egyetlen felelősséggel bírjon.
+   Példa: könyvkeresést (locate) a könyvtáros használja, kiíratást (print) az olvasó. Ezek külön osztályokban: BookLocator, BookPrinter.
+
+OCP (Open/Closed Principle): A kód legyen nyitott bővítésre, de zárt módosításra.
+Példa: minden Shape (pl. Circle, Rectangle) maga számolja ki a getArea(), így nem kell új if-et írni új alakzat esetén.
+
+LSP (Liskov Substitution Principle): Egy osztály altípusa helyettesíthető az eredetivel anélkül, hogy hibás működést okozna.
+Példa: Square nem felel meg a Rectangle öröklésnek, mert setHeight() → setWidth().
+
+ISP (Interface Segregation Principle): Egy osztály csak azokat a műveleteket lássa, amiket használ.
+Példa: EmailClient csak az Emailable-t használja, PhoneClient csak a Callable-t.
+
+DIP (Dependency Inversion Principle): A felsőbb osztályok absztrakt interfészekre épüljenek, ne konkrét implementációkra.
+Példa: Client a Calculator interfészt kapja konstruktorban, nem példányosít LogCalculator-t.
+
+2. Függőség befecskendezés (Dependency Injection)
+   A kliens nem példányosítja a szolgáltatást, hanem külső komponens adja át neki.
+
+Lehetséges formák: konstruktor, metódus, vagy interfész alapú injektálás.
+
+Példa: Injector adja a Client-nek a Calculator-t.
+
+3. Tervezési minták
+   Factory – példányosítási logika elrejtése
+
+Factory Method – leszármazott határozza meg, mit gyárt
+
+Abstract Factory – kapcsolódó objektumok gyártása egy helyen
+
+Command – egy tevékenység (pl. Execute) objektummá alakítása, amit az Invoker hív
+
+4. Architektúrák
+   Monolitikus – minden egy fájlban; rosszul skálázható
+
+Model–View – modell a logika és adat, nézet az UI; nem elég elkülönített
+
+3-Tier –
+
+Nézet (View)
+
+Üzleti logika (Logic)
+
+Perzisztencia (Data)
+
+MVC –
+
+Model: logika és állapot
+
+View: felület, deklaratív
+
+Controller: feldolgozza az eseményeket
+Webes rendszerekben különösen elterjedt.
+
+5. Adatkötés és állapotok
+   Három fő adatállapot:
+
+Display state – felhasználó által látott
+
+Session state – programban tárolt
+
+Record state – adatbázisban mentett
+
+Adatkötés (Data Binding):
+
+Automatizált szinkronizálás Binding objektummal
+
+GetState(), SetState(), Convert()
+
+Nézet ismerheti a bindinget, modell nem
+
+Figyelő minta segít a szinkronban
+
+6. Figyelő minta (Observer)
+   Subject: értesít minden figyelőt (Notify)
+
+Observer: reagál a változásra (Update)
+
+Modell nem ismeri a vezérlőt vagy nézetet – csak eseményt küld
+
+<!-- 5
+ -->
+
+📘 ea05 – Projektmenedzsment eszközök és verziókezelés
+
+1. Fejlesztést támogató eszközök
+   Projekt tracking system – dokumentálás, feladatkövetés
+
+CASE tool – fejlesztési folyamat, felelősségek nyomon követése
+
+IDE – integrált fejlesztési környezet
+
+Revision Control System (VCS) – kódváltozások követése
+
+CI rendszer – hibák automatikus észlelése fejlesztés során
+
+2. Projektmenedzsment eszköz funkciói
+   Ütemterv, kockázatkezelés
+
+Dokumentáció létrehozása és frissítése
+
+Feladatkezelés (ticket/issue – bug, feature, task, documentation)
+
+Kommentelés, határidők, felelősök hozzárendelése
+
+Verziókezelés és code review
+
+3. Népszerű eszközök
+   Trac – Python, MySQL/PostgreSQL/SQLite
+
+Redmine – Ruby on Rails
+
+Azure DevOps – Microsoft (TFVC, Git)
+
+YouTrack – JetBrains, Java + NoSQL (Xodus)
+
+GitHub, GitLab, Bitbucket – cloud-alapú hosting
+
+4. GitLab
+   Webes felület, projektmenedzsment + CI/CD integráció
+
+Két változat:
+
+Community Edition – self-hosted, nyílt forráskód
+
+Enterprise Edition – vállalati funkciók
+
+ELTE GitLab: https://szofttech.inf.elte.hu/
+
+feladatkövetés, wiki, forráskódkezelés, automatikus tesztelés
+
+5. Verziókövetés célja
+   Többfejlesztős munka szinkronizálása
+
+Állapotmentés (commit), visszavonás, visszaállítás
+
+Ágkezelés: branch, merge, tag
+
+Fájl- és sor-szintű változáskövetés
+
+Konfliktuskezelés + diff
+
+6. Verziókezelő generációk
+1. generáció – Lokális (SCCS, RCS), fájlonkénti, zár alapú
+
+1. generáció – Központi (CVS, SVN), kliens-szerver modell
+
+1. generáció – Elosztott (Git, Mercurial), minden kliensnél teljes repo
+
+1. Git parancs alapok
+   git init, clone, add, commit, push, pull
+
+git branch, checkout, merge
+
+.gitignore fájl a kizárásokhoz
+
+Konfliktus: <<<<<<<, =======, >>>>>>>
+
+8. Nagy fájlok kezelése
+   Ne verziókezelj: build fájlok, binárisok, IDE beállítások
+
+.gitignore – minták GitHub-ról: github/gitignore
+
+Git LFS – Nagy fájlokat külső táron tárol (linkelve)
+
+9. Branch modellek
+   GitFlow: master, develop, feature, release, hotfix
+
+GitHub Flow: master + feature, gyors release
+
+GitLab Flow: master, staging, production különválasztva
+
+10. Támogatott eszközök
+    GUI-k: TortoiseGit, SourceTree, GitKraken, SmartGit
+
+IDE-k: IntelliJ IDEA (VCS menü), NetBeans (Team menü)
+
+<!-- 6-->
+
+📗 ea06 – Build Systems (Ant, Maven, Gradle)
+
+1. Why build systems?
+   Manual compiling (e.g. javac, jar) is error-prone, slow, and hard to scale.
+
+Build systems solve:
+
+Compilation automation
+
+Dependency management
+
+Packaging (JAR, WAR, etc.)
+
+Testing and reporting
+
+Deployment automation
+
+2. Ant (Imperative, XML-based)
+   File: build.xml
+
+Key concepts:
+
+<project>: defines name, default target, basedir
+
+<target>: defines a build step (e.g. compile, jar, clean, run)
+
+<property>: key-value pairs, reusable via ${key}
+
+Typical tasks:
+
+prepare: create folders (e.g. mkdir dir="classes")
+
+compile: compile Java with <javac>
+
+jar: package classes into .jar with manifest
+
+clean: delete output files/folders
+
+test: run JUnit tests with <junit> and <batchtest>
+
+run: launch JAR or class with <java>
+
+Used in NetBeans (default) – auto-generates build-impl.xml for hooks
+
+3. Maven (Declarative, XML-based)
+   File: pom.xml
+
+Core concept: POM = Project Object Model
+
+groupId, artifactId, version (GAV)
+
+Build config, test config, dependencies
+
+Lifecycle phases:
+
+validate, compile, test, package, verify, install, deploy
+
+mvn install: compiles, tests, packages, installs locally
+
+mvn clean install: deletes old builds then runs full build
+
+Dependencies:
+
+Declared in <dependencies> block
+
+Resolved from Maven Central → stored in local repo (~/.m2/repository)
+
+Scoped: compile, test, runtime, etc.
+
+Plugins:
+
+Extend functionality, e.g. maven-javadoc-plugin, surefire for test reports
+
+Supports modular projects:
+
+Parent POM + <modules>
+
+4. Gradle (Script-based, Groovy/Kotlin DSL)
+   File: build.gradle (or build.gradle.kts)
+
+Features:
+
+Combines Ant’s flexibility + Maven’s conventions
+
+Faster builds (incremental)
+
+Uses tasks (task name { doLast { ... } })
+
+dependsOn defines task order
+
+Plugins:
+
+java – build, test, jar, clean
+
+application – for executables (mainClass = ...)
+
+Dependency config:
+
+groovy
+Másolás
+Szerkesztés
+repositories { mavenCentral() }
+dependencies {
+implementation "..."
+testImplementation "junit:junit:4.13.2"
+}
+Gradle Wrapper (gradlew) ensures version consistency across machines
+
+Supported in IntelliJ IDEA, NetBeans
+
+5. Summary of Tools
+   Tool Language Style File Key Feature
+   Ant Java Imperative build.xml Fine-grained task control
+   Maven Java Declarative pom.xml Convention over config
+   Gradle Any DSL-based build.gradle Fast, flexible, modern
